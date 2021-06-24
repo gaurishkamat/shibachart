@@ -11,10 +11,8 @@ const CHART_DAYS = 5;
 
 function App() {
   const [apiData, setApiData] = useState([]);
-  const [progress, setProgress] = useState(0);
-  const [timeoutId, setTimeoutId] = useState(null);
-  const [intervalId, setIntervalId] = useState(null);
   const [timer, setTimer] = useState(60);
+  let id = undefined;
   // const [timerId, setTimerId] = useState(null);
 
   const fetchData = () => {
@@ -29,48 +27,22 @@ function App() {
         console.log(filteredData);
         setApiData(filteredData);
         setTimer(60);
-        // clear previous timer
-        // if(timerId){
-        //   clearInterval(timerId);
-        //   setProgress(0);
-        // }
-
-        // let id = setInterval(() => {
-        //   setProgress((prevProgress) => {
-        //     console.log(prevProgress)
-        //     if(prevProgress >=60){
-        //       clearInterval(timerId);
-        //     }
-        //     return (prevProgress >= 60 ? 0 : prevProgress + 1)
-        //   });
-        // }, 1000);
-
-        // setTimerId(id)
       });
 
-    // if (timeoutId) {
-    //   clearTimeout(timeoutId);
-    // }
-
-    let id = setTimeout(() => {
+    id = setTimeout(() => {
       fetchData();
     }, 60000);
-
-    setTimeoutId(id);
   };
 
   useEffect(() => {
     fetchData();
-    // setInterval(() => {
-    //   setProgress((prevProgress) => {
-    //     console.log(prevProgress);
-    //     if (prevProgress >= 60) {
-    //       fetchData();
-    //       return 0;
-    //     }
-    //     return prevProgress + 1;
-    //   });
-    // }, 1000);
+
+    return () => {
+      if (id) {
+        clearTimeout(id);
+      }
+    };
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -87,41 +59,35 @@ function App() {
             style={{
               order: tokenFilter.findIndex((item) => item === token.symbol),
             }}>
-            <div className='token-name'>
-              <img src={token.image} alt={token.name}></img>
-              <h1>{token.name}</h1>
-            </div>
-            <p className='token-price'>${token.current_price}</p>
-            <div
-              className='price-change'
-              style={{
-                backgroundColor:
-                  token.price_change_percentage_24h > 0 ? '#228b22' : '#c04000',
-              }}>
-              <ArrowDropDown
-                size='large'
-                className={
-                  token.price_change_percentage_24h > 0 ? 'up' : 'down'
+            <div className='top-card'>
+              <div className='token-name'>
+                <img src={token.image} alt={token.name}></img>
+                <h1>{token.name}</h1>
+              </div>
+              <p className='token-price'>${token.current_price}</p>
+              <div className='market-cap'>Market Cap - ${token.market_cap}</div>
+              <TokenChart
+                id={token.id}
+                name={token.name}
+                days={CHART_DAYS}
+                currentPrice={token.current_price}
+                color={
+                  token.price_change_percentage_24h > 0 ? '#228b22' : '#c04000'
                 }
               />
-              {token.price_change_percentage_24h.toFixed(2)}%
             </div>
-            <div className='market-cap'>Market Cap ${token.market_cap}</div>
-            <TokenChart
-              id={token.id}
-              name={token.name}
-              days={CHART_DAYS}
-              currentPrice={token.current_price}
-            />
-            <div className='high_low'>
-              <p>
-                Low 24h
-                <TrendingDown style={{ color: '#c04000' }} />- ${token.low_24h}
-              </p>
-              <p>
-                High 24h
-                <TrendingUp style={{ color: '#228b22' }} />- ${token.high_24h}
-              </p>
+            <div className='bottom-card'>
+              <div className='high_low'>
+                <p>
+                  Low 24h
+                  <TrendingDown style={{ color: '#c04000' }} />- $
+                  {token.low_24h}
+                </p>
+                <p>
+                  High 24h
+                  <TrendingUp style={{ color: '#228b22' }} />- ${token.high_24h}
+                </p>
+              </div>
             </div>
           </div>
         ))}

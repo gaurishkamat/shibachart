@@ -1,5 +1,5 @@
 import { Timer } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 const Interval = ({ timer, setTimer }) => {
   useEffect(() => {
@@ -10,6 +10,7 @@ const Interval = ({ timer, setTimer }) => {
     return () => {
       clearInterval(id);
     };
+    //eslint-disable-next-line
   }, []);
 
   return (

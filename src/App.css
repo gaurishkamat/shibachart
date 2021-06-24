@@ -57,10 +57,10 @@ body {
 }
 
 .price-change {
+  align-self: flex-end;
   width: fit-content;
   position: relative;
-  top: -20%;
-  left: 85%;
+  left: 170%;
   padding: 5px;
   border-radius: 5px;
   font-weight: bold;
@@ -88,7 +88,7 @@ img {
 .token-price {
   font-size: 35px;
   font-weight: bold;
-  margin: 0px;
+  margin: 10px;
 }
 
 .high_low {
@@ -119,10 +119,15 @@ img {
   border-radius: 10px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 950px) {
+  .my-chart {
+    width: 480px;
+  }
+
+  .loader {
+    top: 47.5%;
+  }
   .token-card {
-    display: flex;
-    flex-direction: column;
     height: 47%;
     width: 47%;
     margin: 5px 10px;
@@ -149,6 +154,7 @@ img {
 .app-chart {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .apexcharts-yaxis {
@@ -160,8 +166,8 @@ img {
 }
 
 .market-cap {
-  margin-top: -20px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .timer {
@@ -175,4 +181,33 @@ img {
   justify-content: center;
   align-items: center;
   margin: 0px;
+}
+
+/* New CSS */
+
+.top-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.left-card {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-card {
+  display: flex;
+  width: 70%;
+}
+
+.bottom-card {
+  padding-top: 10px;
+  margin-top: -40px;
+  border-top: 2px dotted grey;
 }

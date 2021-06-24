@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
-const TokenChart = ({ id, name, days, currentPrice }) => {
+const TokenChart = ({ id, name, days, currentPrice, color }) => {
   const [options, setOptions] = useState({
     chart: {
       id: 'line',
@@ -43,15 +43,12 @@ const TokenChart = ({ id, name, days, currentPrice }) => {
           xaxis: {
             categories: dates,
           },
-          fill: {
-            colors: ['#9C27B0'],
-            gradient: {
-              shadeIntensity: 1,
-              inverseColors: true,
-              opacityFrom: 1,
-              opacityTo: 0,
-              stops: [100, 50, 0],
-              color: '#202020',
+          theme: {
+            monochrome: {
+              enabled: true,
+              color: color,
+              shadeTo: 'light',
+              shadeIntensity: 0.65,
             },
           },
         };
@@ -73,7 +70,13 @@ const TokenChart = ({ id, name, days, currentPrice }) => {
     <div className='app-chart'>
       <div className='row'>
         <div className='mixed-chart'>
-          <Chart options={options} series={series} type='line' width='450' />
+          <Chart
+            className='my-chart'
+            options={options}
+            series={series}
+            type='line'
+            width='450'
+          />
         </div>
       </div>
     </div>
