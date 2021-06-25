@@ -59,10 +59,24 @@ function App() {
             style={{
               order: tokenFilter.findIndex((item) => item === token.symbol),
             }}>
+            <div
+              className='price-change'
+              style={{
+                backgroundColor:
+                  token.price_change_percentage_24h > 0 ? '#228b22' : '#c04000',
+              }}>
+              <ArrowDropDown
+                size='large'
+                className={
+                  token.price_change_percentage_24h > 0 ? 'up' : 'down'
+                }
+              />
+              {token.price_change_percentage_24h.toFixed(2)}%
+            </div>
             <div className='top-card'>
               <div className='token-name'>
                 <img src={token.image} alt={token.name}></img>
-                <h1>{token.name}</h1>
+                <p>{token.name}</p>
               </div>
               <p className='token-price'>${token.current_price}</p>
               <div className='market-cap'>Market Cap - ${token.market_cap}</div>

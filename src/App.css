@@ -59,8 +59,9 @@ body {
 .price-change {
   align-self: flex-end;
   width: fit-content;
-  position: relative;
-  left: 170%;
+  /* position: relative; */
+  /* left: 170%; */
+  margin: 5px;
   padding: 5px;
   border-radius: 5px;
   font-weight: bold;
@@ -137,10 +138,11 @@ img {
   }
 
   .price-change {
+    align-self: flex-end;
     width: fit-content;
-    position: relative;
-    top: -250px;
-    left: 75%;
+    /* position: relative; */
+    /* left: 170%; */
+    margin: 5px;
     padding: 5px;
     border-radius: 5px;
     font-weight: bold;
@@ -210,4 +212,10 @@ img {
   padding-top: 10px;
   margin-top: -40px;
   border-top: 2px dotted grey;
+}
+
+.token-name p {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 0px;
 }
