@@ -50,61 +50,68 @@ function App() {
       <div className='loader'>
         <Interval timer={timer} setTimer={setTimer} />
       </div>
-      {Array.isArray(apiData) &&
-        apiData.length &&
-        apiData.map((token) => (
-          <div
-            key={token.id}
-            className='token-card'
-            style={{
-              order: tokenFilter.findIndex((item) => item === token.symbol),
-            }}>
+      {Array.isArray(apiData) && apiData.length
+        ? apiData.map((token) => (
             <div
-              className='price-change'
+              key={token.id}
+              className='token-card'
               style={{
-                backgroundColor:
-                  token.price_change_percentage_24h > 0 ? '#228b22' : '#c04000',
+                order: tokenFilter.findIndex((item) => item === token.symbol),
               }}>
-              <ArrowDropDown
-                size='large'
-                className={
-                  token.price_change_percentage_24h > 0 ? 'up' : 'down'
-                }
-              />
-              {token.price_change_percentage_24h.toFixed(2)}%
-            </div>
-            <div className='top-card'>
-              <div className='token-name'>
-                <img src={token.image} alt={token.name}></img>
-                <p>{token.name}</p>
+              <div
+                className='price-change'
+                style={{
+                  backgroundColor:
+                    token.price_change_percentage_24h > 0
+                      ? '#228b22'
+                      : '#c04000',
+                }}>
+                <ArrowDropDown
+                  size='large'
+                  className={
+                    token.price_change_percentage_24h > 0 ? 'up' : 'down'
+                  }
+                />
+                {token.price_change_percentage_24h.toFixed(2)}%
               </div>
-              <p className='token-price'>${token.current_price}</p>
-              <div className='market-cap'>Market Cap - ${token.market_cap}</div>
-              <TokenChart
-                id={token.id}
-                name={token.name}
-                days={CHART_DAYS}
-                currentPrice={token.current_price}
-                color={
-                  token.price_change_percentage_24h > 0 ? '#228b22' : '#c04000'
-                }
-              />
-            </div>
-            <div className='bottom-card'>
-              <div className='high_low'>
-                <p>
-                  Low 24h
-                  <TrendingDown style={{ color: '#c04000' }} />- $
-                  {token.low_24h}
-                </p>
-                <p>
-                  High 24h
-                  <TrendingUp style={{ color: '#228b22' }} />- ${token.high_24h}
-                </p>
+              <div className='top-card'>
+                <div className='token-name'>
+                  <img src={token.image} alt={token.name}></img>
+                  <p>{token.name}</p>
+                </div>
+                <p className='token-price'>${token.current_price}</p>
+                <div className='market-cap'>
+                  Market Cap - ${token.market_cap}
+                </div>
+                <TokenChart
+                  id={token.id}
+                  name={token.name}
+                  days={CHART_DAYS}
+                  currentPrice={token.current_price}
+                  color={
+                    token.price_change_percentage_24h > 0
+                      ? '#228b22'
+                      : '#c04000'
+                  }
+                />
+              </div>
+              <div className='bottom-card'>
+                <div className='high_low'>
+                  <p>
+                    Low 24h
+                    <TrendingDown style={{ color: '#c04000' }} />- $
+                    {token.low_24h}
+                  </p>
+                  <p>
+                    High 24h
+                    <TrendingUp style={{ color: '#228b22' }} />- $
+                    {token.high_24h}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        : null}
     </div>
   );
 }
