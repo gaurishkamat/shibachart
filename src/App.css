@@ -87,9 +87,9 @@ img {
 }
 
 .token-price {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
-  margin: 10px;
+  margin: 5px;
 }
 
 .high_low {
@@ -105,7 +105,7 @@ img {
 }
 
 .loader {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   height: 35px;
@@ -168,7 +168,7 @@ img {
 }
 
 .market-cap {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
 }
 
@@ -188,6 +188,7 @@ img {
 /* New CSS */
 
 .top-card {
+  margin: -35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -210,7 +211,6 @@ img {
 
 .bottom-card {
   padding-top: 10px;
-  margin-top: -40px;
   border-top: 2px dotted grey;
 }
 
@@ -218,4 +218,17 @@ img {
   font-size: 35px;
   font-weight: bold;
   margin: 0px;
+}
+
+.blink {
+  animation: blinker 1.5s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.trading-chart{
+  border: 2px dotted black;
 }
