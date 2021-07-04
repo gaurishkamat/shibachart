@@ -4,6 +4,7 @@ import { React, useEffect, useState } from 'react';
 import { ArrowDropDown, TrendingDown, TrendingUp } from '@material-ui/icons';
 import TokenChart from './Chart';
 import Interval from './Interval';
+import TradingChart from './TradingChart';
 
 const tokenFilter = ['shib', 'eth', 'btc', 'doge'];
 
@@ -75,7 +76,7 @@ function App() {
                 {token.price_change_percentage_24h.toFixed(2)}%
               </div>
               <div className='top-card'>
-                <div className='token-name'>
+                <div className='token-name blink'>
                   <img src={token.image} alt={token.name}></img>
                   <p>{token.name}</p>
                 </div>
@@ -83,7 +84,7 @@ function App() {
                 <div className='market-cap'>
                   Market Cap - ${token.market_cap}
                 </div>
-                <TokenChart
+                {/* <TokenChart
                   id={token.id}
                   name={token.name}
                   days={CHART_DAYS}
@@ -93,7 +94,8 @@ function App() {
                       ? '#228b22'
                       : '#c04000'
                   }
-                />
+                /> */}
+                <TradingChart symbol={token.symbol}/>
               </div>
               <div className='bottom-card'>
                 <div className='high_low'>
