@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import TradingViewWidget, { Themes, BarStyles } from 'react-tradingview-widget';
+import React, { useEffect, useRef, useState } from 'react'
+import TradingViewWidget, { BarStyles } from 'react-tradingview-widget'
 
+const TradingChart = ({ symbol }) => {
+  const chartRef = useRef(null)
+  const [height, setHeight] = useState(0)
+  const [width, setWidth] = useState(0)
 
-const TradingChart = ({symbol}) => {
+  useEffect(() => {
+    let element = chartRef.current.parentElement
+    console.log(element.clientHeight, element.clientWidth)
+    setHeight(element.clientHeight)
+    setWidth(element.clientWidth)
+  }, [])
 
-    const [value, setValue] = useState(0);
-
-    
-
-    useEffect(()=>{
-        console.log('Value', value);
-    }, [value]);
-
-    return <div className='trading-chart'>
-    <TradingViewWidget symbol={`BINANCE:${symbol.toUpperCase()}USDT`} 
-      hide_top_toolbar={true}
-      BarStyles={BarStyles.HEIKIN_ASHI}
-      interval='1'
-      height='170px'
-      width='420px'/>
-      </div>
+  return (
+    <div className="trading-chart" ref={chartRef}>
+      <TradingViewWidget
+        symbol={`BINANCE:${symbol.toUpperCase()}USDT`}
+        hide_top_toolbar={true}
+        BarStyles={BarStyles.HEIKIN_ASHI}
+        interval="1"
+        height={height - 5}
+        width={width - 5}
+      />
+    </div>
+  )
 }
 
-
-export default TradingChart;
+export default TradingChart
