@@ -146,6 +146,33 @@ img {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .card-body {
+    width: 100% !important;
+    height: 48% !important;
+  }
+
+  .token-name p {
+    font-size: 22px !important;
+  }
+
+  .market-cap {
+    font-size: 12px !important;
+  }
+
+  .token-price {
+    font-size: 0.9rem !important;
+  }
+
+  .high_low {
+    font-size: 12px !important;
+  }
+
+  .pricechange {
+    font-size: 16px !important;
+  }
+}
+
 .app-chart {
   display: flex;
   justify-content: center;
